@@ -11,7 +11,7 @@ interface CartContextType {
   cart: CartItem[];
   addToCart: (product: CartItem) => void;
 }
-//This function creates a new context. default value as undefined because to enforce that the context must be used within a CartProvider
+//This function creates a new context. default value as undefined to enforce that the context must be used within a CartProvider
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 // the CartProvider provide context to its children
@@ -20,7 +20,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const addToCart = (product: CartItem) => {
     setCart((prevCart) => {
-      // Checks if the product being added already exists in the cart by finding its index. If it exists, itemIndex will be its position; otherwise, it will be -1.
+// Checks if the product being added already exists in the cart by finding its index. If it exists, itemIndex will be its position; otherwise, it will be -1.
       const itemIndex = prevCart.findIndex((item) => item.id === product.id);
 
       //If it exists (itemIndex !== -1)
@@ -37,6 +37,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
+    //This component provides the cart and addToCart function to all its child components
     <CartContext.Provider value={{ cart, addToCart }}>
       {children}
     </CartContext.Provider>
